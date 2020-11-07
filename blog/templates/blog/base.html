@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Blog</title>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Alternative to Bootstrap 3 Glyphicons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Medium Editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-staic-top">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-brand" href="{% url 'post_list' %}">My Tech Blog</a></li>
+                <li><a class="navbar-link" href="{% url 'about' %}">About</a></li>
+                <li><a class="navbar-link" href="https://github.com/UmarSyal" target="blank">Github</a></li>
+                <li><a class="navbar-link" href="https://www.linkedin.com" target="blank">LinkedIn</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li><a class="navbar-link" href="{% url 'post_create' %}">New Post</a></li>
+                    <li><a class="navbar-link" href="{% url 'post_draft_list' %}">Drafts</a></li>
+                    <li><a class="navbar-link" href="{% url 'logout' %}">Log Out</a></li>
+                    <li><a>Welcome: {{ user.username }}</a></li>
+                {% else %}
+                    <li>
+                        <a class="navbar-link" href="{% url 'login' %}">
+                            <span class="fa fa-user" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+</html>

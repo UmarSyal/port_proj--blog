@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1>Please Login:</h1>
+        <h2>(Must be SuperUser, please check admin for issues.)</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <p>
+                <label for="username">Username:</label>
+                <input type="text" name="username">
+            </p>
+            
+            <p>
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+            </p>
+
+            <p>
+                <button class="btn btn-primary" type="submit">Login</button>
+            </p>
+        </form>
+    </div>
+    
+    <script>var editor = new MediumEditor('.editable');</script>
+{% endblock content %}
